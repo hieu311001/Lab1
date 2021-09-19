@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <title>Document</title>
+
+    <style>
+        .tb1{
+            display: flex;
+        }
+        ul{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-right: 5px;
+        }
+        .thucdon{
+            background: #dee3e7;
+            border:solid 1px #c3c8ac;
+            padding: 5px;
+            margin: 1px;
+            cursor: pointer;
+        }
+        .thucdon:hover{
+            background: #ffffff !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="tb1">
+        <ul >
+            <li> <p class="thucdon"> >> Quản lý cán bộ (Đăng ký nội dung) </p></li>
+            <li> <p class="thucdon"> >> Phân quyền </p></li>
+            <li> <p class="thucdon"> >> Cổng thông tin đào tạo và người học </p></li>
+            <li> <p class="thucdon"> >> Quản lý văn bản và hồ sơ người dùng </p></li>
+            <li> <p class="thucdon"> >> Hành chính công </p></li>
+            <li> <p class="thucdon"> >> Hệ thống thông tin báo cáo </p></li>
+        </ul>
+        <ul>
+            <li ><p class="them"></p></li>
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $(".thucdon").click(function(){
+                $(".thucdon").css("background","#dee3e7");
+                $(this).css("background","#00fafc");
+                
+                var a = $(this).html();
+                $(".them").html(a);
+            })
+        })
+    </script>
+</body>
+</html>
