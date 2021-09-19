@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    
+    <title>Document</title>
+
+    <style>
+        .lab{
+            padding: 2px 0;
+            display: flex;
+            align-items: center;
+        }
+        label{
+            width: 150px;
+            float: left;
+        }
+        input{
+            padding: 5px 2px;
+        }
+        input:focus{
+            outline: none;
+        }
+        .bd{
+            width: 250px;
+            border: solid 1px black;
+            border-radius: 1px;
+        }
+        span{
+            margin-left: 10px;
+        }
+        .batbuoc{
+            background:#00ffff;
+        }
+        .btn{
+            position: relative;
+            left: 150px;
+        }
+        #btn_1,#btn_2{
+            background:#2196f3;
+            color: white;
+            border: solid 1px black;
+            padding: 5px 8px;
+            cursor: pointer;
+        }
+        #btn_1:hover{
+            background: #0986ec;
+        }
+        #btn_1{
+            margin-right: 5px;
+        }
+    </style>
+    
+</head>
+<body>
+    <form action="">
+        <div class="lab">
+            <label for="">Họ tên: </label>
+            <input type="text" name="hoten" class="batbuoc bd" id="hoten" value="">
+            <span id="ErrorName"></span>
+        </div>
+        <div class="lab">
+            <label for="">Địa chỉ: </label>
+            <input type="text" name="hoten" class="batbuoc bd" id="diachi">
+            <span id="ErrorAddress"></span>
+        </div>
+        <div class="lab">
+            <label for="">Giới tính</label>
+            <input type="radio" name="gt" checked="checked" id="nam">Nam
+            <input type="radio" name="gt" id="nu">Nữ
+        </div>
+        <div class="lab">
+            <label for="">Ngày sinh: </label>
+            <input type="date" class="batbuoc bd" id="ngaysinh">
+            <span id="ErrorDate"></span>
+        </div>
+        <div class="lab">
+            <label for="">Email: </label>
+            <input type="email" class="batbuoc bd" id="email">
+            <span id="ErrorEmail"></span>
+        </div>
+        <div class="lab">
+            <label for="">Điện thoại: </label>
+            <input type="tel" class="bd" id="sdt">
+        </div>
+        <div class="lab">
+            <label for="">Khóa đăng ký: </label>
+            <input type="checkbox" name="cb">Tiếng Anh
+            <input type="checkbox" name="cb">Quản trị
+            <input type="checkbox" name="cb">CNTT
+        </div>
+        <div class="lab">
+            <label for="">Tên đăng nhập:</label>
+            <input type="text" class="batbuoc bd" id="tdn">
+            <span id="ErrorUserName"></span>
+        </div>
+        <div class="lab">
+            <label for="">Mật Khẩu</label>
+            <input type="password" class="batbuoc bd" id="pass">
+            <span id="ErrorPass"></span>
+        </div>
+        <div class="lab">
+            <label for="">Nhập lại mật khẩu:</label>
+            <input type="password" class="batbuoc bd" id="nhaplai">
+            <span id="ErrorPass2"></span>
+        </div>
+        <div class="lab">
+            <label for="">Ghi chú:</label>
+            <input type="text" class="bd" style="height:30px" id="ghichu">
+        </div>
+        <div class="lab">
+            <label for="">Ảnh chân dung </label>
+            <input type="file">
+        </div>
+        <div class="btn lab">
+            <input type="button" value="Chấp nhận" id="btn_1">
+            <input type="button" value="Bỏ qua" id="btn_2">
+        </div>
+    </form>
+    
+    <script>
+        function KeyUp(e,nextId){
+            if (window.event) e = window.event;
+            if (e.keyCode == 13) document.getElementById(nextId).focus();
+        }
+        function ChuanHoa(str_name){
+            str_ch = str_name;
+            str = str_ch.split(" ");
+            str_ch = "";
+            for (var i=0;i<str.length;i++){
+                if (str[i].length > 0) str_ch = str_ch +" ";
+                str_ch = str_ch + str[i].substring(0, 1).toUpperCase();
+                str_ch = str_ch + str[i].substring(1).toLowerCase();
+            }
+            return str_ch;
+        }
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+        $(document).ready(function(){
+            $("#hoten").focus();
+            $("#hoten").blur(function(){
+                this.value = ChuanHoa(this.value);
+            })
+
+            $("#hoten").keyup(function(e){
+                KeyUp(e,'diachi');
+            })
+            $("#diachi").keyup(function(e){
+                KeyUp(e,'ngaysinh');
+            })
+            $("#ngaysinh").keyup(function(e){
+                KeyUp(e,'email');
+            })
+            $("#email").keyup(function(e){
+                KeyUp(e,'sdt');
+            })
+            $("#sdt").keyup(function(e){
+                KeyUp(e,'tdn');
+            })
+            $("#tdn").keyup(function(e){
+                KeyUp(e,'pass');
+            })
+            $("#pass").keyup(function(e){
+                KeyUp(e,'nhaplai');
+            })
+            $("#nhaplai").keyup(function(e){
+                KeyUp(e,'ghichu');
+            })
+
+            $("#btn_1").click(function(){
+                //Họ tên
+                if ($("#hoten").val() == "") $("#ErrorName").html("*Chưa nhập họ tên");
+                else $("#ErrorName").html("");
+                //Địa chỉ
+                if ($("#diachi").val() == "") $("#ErrorAddress").html("*Chưa nhập địa chỉ");
+                else $("#ErrorAddress").html("");
+                //Email
+                var email = $("#email").val().trim();
+                if ($("#email").val() == "") $("#ErrorEmail").html("*Chưa nhập Email"); 
+                else if (!isEmail(email)) $("#ErrorEmail").html("*Email không hợp lệ"); 
+                else $("#ErrorEmail").html("");
+                //UserName
+                if ($("#tdn").val() == "") $("#ErrorUserName").html("*Chưa nhập UserName");
+                else $("#ErrorUserName").html("");
+                //Pass
+                if ($("#pass").val() == "") $("#ErrorPass").html("*Chưa nhập Pass");
+                else $("#ErrorPass").html("");
+                //Pass2
+                if ($("#nhaplai").val() !== $("#pass").val()) $("#ErrorPass2").html("*Mật khẩu không trùng khớp");
+                else $("#ErrorPass2").html("");
+            })
+        })
+    </script>
+</body>
+</html>
