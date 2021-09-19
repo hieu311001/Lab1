@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+
+    <title>Document</title>
+
+    <style>
+        ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .tab_list {
+            border: solid 1px black;
+            border-radius: 2px;
+            margin: 0 5px;
+            background: #dee3e7;
+            cursor: pointer;
+            padding: 2px;
+        }
+        .tab_list:hover{
+            background: #ffffff !important;
+        }
+        .tab_content {
+            position: relative;
+            width: 300px;
+            height: 150px;
+            border: solid 1px black;
+        }
+        .tab_box{
+            padding: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li class="tab_list">Tab 1</li>
+        <li class="tab_list">Tab 2</li>
+        <li class="tab_list">Tab 3</li>
+        <li class="tab_list">Tab 4</li>
+    </ul>
+    <div class="tab_content">
+        <div class="tab_box">Xin chào tất cả các bạn</div>
+        <div class="tab_box">Đây là bài tập về Tab của mình</div>
+        <div class="tab_box">Mong là nó được max điểm</div>
+        <div class="tab_box">Xin cảm ơn</div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $(".tab_box:eq(0)").show();
+            $(".tab_list").click(function(){
+                $(".tab_list").css("background","#dee3e7");
+                $(this).css("background","#00fafc");
+
+                var n = $(".tab_list").index(this);
+                $(".tab_box").hide();
+                $(".tab_box:eq("+ n +")").fadeIn(300);
+            })
+        })
+    </script>
+</body>
+
+</html>
